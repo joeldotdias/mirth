@@ -1,0 +1,12 @@
+services:
+  squeel:
+    image: "postgres:15.2-alpine"
+    env_file: "./.env"
+    ports:
+      - "8003:5432"
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+
+volumes:
+  pgdb:
+    driver: local
