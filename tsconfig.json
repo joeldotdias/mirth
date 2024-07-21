@@ -31,6 +31,10 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
+        "**/*.cjs",
+        "**/*.js",
+        "./src/app/types/*.d.ts",
+        "eslint.config.cjs",
         ".next/types/**/*.ts"
     ],
     "exclude": [
