@@ -5,6 +5,7 @@ import {
     text,
     primaryKey,
     integer,
+    varchar,
 } from "drizzle-orm/pg-core";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -23,6 +24,8 @@ export const users = pgTable("user", {
     email: text("email").notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
+    bio: text("bio"),
+    pfpUrl: varchar("pfp_url", { length: 1024 }),
 });
 
 export const accounts = pgTable(
