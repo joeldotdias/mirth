@@ -4,6 +4,7 @@ import "./globals.css";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
     title: "Mirth",
@@ -18,7 +19,10 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${GeistSans.variable}`}>
             <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-            <body>{children}</body>
+            <body>
+                {children}
+                <Toaster />
+            </body>
         </html>
     );
 }

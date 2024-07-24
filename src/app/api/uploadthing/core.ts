@@ -6,7 +6,13 @@ import { UploadThingError } from "uploadthing/server";
 const f = createUploadthing();
 
 export const ourFileRouter = {
-    pfpUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+    pfpUploader: f({
+        image: {
+            maxFileSize: "4MB",
+            maxFileCount: 1,
+            additionalProperties: { width: 200, aspectRatio: 1 },
+        },
+    })
         .middleware(async () => {
             const user = await getUser();
             if (!user) {
