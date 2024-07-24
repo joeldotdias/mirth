@@ -122,6 +122,7 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
                     <div className="relative h-full min-h-[400px] w-full">
                         <Cropper
                             image={file?.preview}
+                            cropShape="round"
                             aspect={imageProperties?.aspectRatio}
                             maxZoom={5}
                             crop={crop}
@@ -196,13 +197,13 @@ const cropAndSclaeImage = async (
     await new Promise((resolve) => (image.onload = resolve));
 
     const cropCanvas = document.createElement("canvas");
-    const ctx = cropCanvas.getContext("2d");
-    invariant(ctx, "Couldn't get canvas context");
+    const cropCtx = cropCanvas.getContext("2d");
+    invariant(cropCtx, "Couldn't get canvas context");
 
     cropCanvas.width = crop.width;
     cropCanvas.height = crop.height;
 
-    ctx.drawImage(
+    cropCtx.drawImage(
         image,
         crop.x,
         crop.y,
