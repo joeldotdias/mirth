@@ -7,7 +7,6 @@ import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "@/components/ui/sonner";
 import SideNav from "./_components/sidenav";
 import { Providers } from "./providers";
-import { auth } from "@/auth";
 
 export const metadata: Metadata = {
     title: "Mirth",
@@ -19,26 +18,6 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const session = await auth();
-    {
-        /* <main className="container mx-auto min-h-screen"> */
-    }
-    {
-        /*     <div className="flex gap-6"> */
-    }
-    {
-        /*         <SideNav /> */
-    }
-    {
-        /*         <div className="w-full">{children}</div> */
-    }
-    {
-        /*     </div> */
-    }
-    {
-        /* </main> */
-    }
-
     return (
         <html
             lang="en"
@@ -48,9 +27,9 @@ export default async function RootLayout({
             <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
             <body>
                 <Providers>
-                    <div className="flex flex-row">
+                    <div className="flex w-screen flex-row">
                         <SideNav />
-                        <main>{children}</main>
+                        <main className="w-full">{children}</main>
                     </div>
                     <Toaster />
                 </Providers>

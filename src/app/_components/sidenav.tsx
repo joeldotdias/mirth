@@ -18,8 +18,9 @@ export default function SideNav() {
 
                 <NavLinks />
 
-                <div className="flex w-full justify-center py-4">
+                <div className="flex w-full items-center gap-2 py-4">
                     <Avatar />
+                    <span className="hidden lg:block">Profile</span>
                 </div>
             </div>
 
