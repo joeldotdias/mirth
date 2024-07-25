@@ -1,13 +1,6 @@
 "use client";
 
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useUploadThing } from "@/lib/uploadthing";
 import { invariant } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -92,14 +85,9 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
                 }}
             />
 
-            <div className="flex justify-between">
-                <CardHeader>
-                    <CardTitle>Profile Picture</CardTitle>
-                    <CardDescription>Pfp for your account</CardDescription>
-                </CardHeader>
-
+            <div className="flex justify-center">
                 {!file && (
-                    <div className="relative p-6">
+                    <div className="relative p-2">
                         {newImageLoading && (
                             <div className="absolute inset-6 flex animate-pulse items-center justify-center rounded-2xl bg-black/80" />
                         )}
@@ -108,7 +96,7 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
                             src={output?.preview ?? pfpUrl}
                             alt="pfp"
                             className={
-                                "size-32 cursor-pointer rounded-2xl hover:opacity-75"
+                                "size-24 cursor-pointer rounded-full hover:opacity-75"
                             }
                             onClick={() => inputRef.current?.click()}
                         />
@@ -134,7 +122,7 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
                 </CardContent>
             )}
 
-            <CardFooter className="justify-between border-t px-6 py-4">
+            <CardFooter className="justify-center border-t px-6 py-4">
                 <p className="text-sm text-muted-foreground">
                     {file
                         ? "Zoom and drag to crop the image"
@@ -164,6 +152,7 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
                                     if (inputRef.current) {
                                         inputRef.current.value = "";
                                     }
+                                    setOutput(null);
                                 }}
                             >
                                 <XIcon className="size-5" />

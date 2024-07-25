@@ -15,8 +15,9 @@ export default async function Profile() {
                     )}
                 </div>
                 <div className="flex flex-col gap-2">
-                    <div className="font-bold">{user?.name}</div>
-                    {/* stats */}
+                    <div className="font-bold">
+                        {user?.username ?? user?.name}
+                    </div>
                     <Stats />
 
                     {user?.bio && <p className="pt-4">{user.bio}</p>}

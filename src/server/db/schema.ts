@@ -10,8 +10,10 @@ import {
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import type { AdapterAccountType } from "next-auth/adapters";
+import { env } from "@/env";
 
-const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
+// const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
+const connectionString = env.POSTGRES_URL;
 const pool = postgres(connectionString, { max: 20 });
 
 export const db = drizzle(pool);
@@ -24,6 +26,7 @@ export const users = pgTable("user", {
     email: text("email").notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
+    username: varchar("username", { length: 256 }),
     bio: text("bio"),
     pfpUrl: varchar("pfp_url", { length: 1024 }),
 });
