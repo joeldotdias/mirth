@@ -8,7 +8,7 @@ import { eq } from "drizzle-orm";
 export async function getUser() {
     const session = await auth();
     if (!session?.user) {
-        throw new Error("Unauthorized");
+        return;
     }
 
     const user = await db.query.users.findFirst({

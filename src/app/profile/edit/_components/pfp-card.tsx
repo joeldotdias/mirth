@@ -104,7 +104,6 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
                             <div className="absolute inset-6 flex animate-pulse items-center justify-center rounded-2xl bg-black/80" />
                         )}
 
-                        {/*eslint-disable-next-line*/}
                         <img
                             src={output?.preview ?? pfpUrl}
                             alt="pfp"
