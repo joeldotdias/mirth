@@ -4,6 +4,7 @@ import { Boxes, House, Search, type LucideProps } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ForwardRefExoticComponent, RefAttributes } from "react";
+import React from "react";
 
 type LucideIcon = ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>

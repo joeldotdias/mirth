@@ -22,6 +22,7 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
     const [zoom, setZoom] = useState(1);
     const [croppedArea, setCroppedArea] = useState<Area | null>(null);
     const [newImageLoading, setNewImageLoading] = useState(false);
+    const [output, setOutput] = useState<FileWithPreview | null>(null);
     const router = useRouter();
 
     const { isUploading, startUpload, routeConfig } = useUploadThing(
@@ -51,7 +52,6 @@ export function PfpUploader({ pfpUrl }: { pfpUrl: string }) {
     );
 
     const imageProperties = expandImageProperties(routeConfig);
-    const [output, setOutput] = useState<FileWithPreview | null>(null);
 
     useEffect(() => {
         if (file && croppedArea) {

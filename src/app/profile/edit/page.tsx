@@ -6,12 +6,12 @@ export default async function EditProfile() {
     const user = await getUser();
 
     return (
-        <div className="flex flex-col gap-7">
+        <main className="container mx-auto flex min-h-screen flex-col gap-7 pt-6">
             <PfpUploader pfpUrl={user?.pfpUrl ?? user?.image ?? ""} />
             <UpdateProfileForm
                 username={user?.username ?? ""}
                 bio={user?.bio ?? ""}
             />
-        </div>
+        </main>
     );
 }

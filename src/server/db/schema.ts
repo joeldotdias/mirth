@@ -6,6 +6,7 @@ import {
     primaryKey,
     integer,
     varchar,
+    date,
 } from "drizzle-orm/pg-core";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -14,7 +15,7 @@ import { env } from "@/env";
 
 // const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
 const connectionString = env.POSTGRES_URL;
-const pool = postgres(connectionString, { max: 20 });
+const pool = postgres(connectionString, { max: 40 });
 
 export const db = drizzle(pool);
 
@@ -29,6 +30,7 @@ export const users = pgTable("user", {
     username: varchar("username", { length: 256 }),
     bio: text("bio"),
     pfpUrl: varchar("pfp_url", { length: 1024 }),
+    birthdate: date("birthdate", { mode: "date" }),
 });
 
 export const accounts = pgTable(

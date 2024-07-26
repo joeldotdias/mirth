@@ -1,4 +1,5 @@
 import { getUser } from "@/server/queries";
+import { User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,7 +12,7 @@ export default async function Avatar() {
                 {user?.pfpUrl ? (
                     <Image src={user.pfpUrl} alt="img" fill={true} />
                 ) : (
-                    <div></div>
+                    <User />
                 )}
             </Link>
         </div>

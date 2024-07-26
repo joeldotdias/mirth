@@ -1,3 +1,5 @@
+import "server-only";
+
 import { db } from "./db";
 import { auth } from "@/auth";
 import { users } from "./db/schema";
@@ -27,7 +29,11 @@ export async function updateUserPfp(userId: string, pfpUrl: string) {
     }
 }
 
-export async function updateUserInfo(username: string, bio: string) {
+export async function updateUserInfo(
+    username: string,
+    bio: string,
+    birthdate: Date,
+) {
     const user = await getUser();
     if (!user) {
         throw new Error("Unauthorized");
@@ -36,7 +42,7 @@ export async function updateUserInfo(username: string, bio: string) {
     try {
         await db
             .update(users)
-            .set({ username: username, bio: bio })
+            .set({ username: username, bio: bio, birthdate: birthdate })
             .where(eq(users.id, user.id));
     } catch (err) {
         console.error(err);
