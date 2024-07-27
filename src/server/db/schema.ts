@@ -6,7 +6,6 @@ import {
     primaryKey,
     integer,
     varchar,
-    date,
 } from "drizzle-orm/pg-core";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -30,7 +29,11 @@ export const users = pgTable("user", {
     username: varchar("username", { length: 256 }),
     bio: text("bio"),
     pfpUrl: varchar("pfp_url", { length: 1024 }),
-    birthdate: date("birthdate", { mode: "date" }),
+    birthdate: timestamp("birthdate", {
+        mode: "date",
+        precision: 6,
+        withTimezone: true,
+    }),
 });
 
 export const accounts = pgTable(

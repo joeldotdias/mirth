@@ -11,6 +11,7 @@ export default async function EditProfile() {
             <UpdateProfileForm
                 username={user?.username ?? ""}
                 bio={user?.bio ?? ""}
+                birthdate={user?.birthdate ?? new Date()}
             />
         </main>
     );

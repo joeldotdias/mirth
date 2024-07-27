@@ -5,7 +5,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { updateProfile } from "@/app/actions";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 import {
     Form,
     FormControl,
@@ -15,17 +18,14 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 
 const formSchema = z.object({
@@ -43,7 +43,7 @@ export default function UpdateProfileForm({
 }: {
     username: string;
     bio: string;
-    birthdate?: Date;
+    birthdate: Date;
 }) {
     const router = useRouter();
 
@@ -52,7 +52,7 @@ export default function UpdateProfileForm({
         defaultValues: {
             username: username,
             bio: bio,
-            birthdate: birthdate ?? new Date(),
+            birthdate: birthdate,
         },
     });
 
@@ -60,7 +60,11 @@ export default function UpdateProfileForm({
         try {
             await updateProfile(values.username, values.bio, values.birthdate);
             router.back();
-            toast("Updated your bio 🎉");
+            toast(
+                <span className="text-lg font-bold">
+                    {"Updated your bio 🎉"}
+                </span>,
+            );
         } catch (err) {
             toast.error(err as string);
         }
@@ -113,7 +117,7 @@ export default function UpdateProfileForm({
                                         <Button
                                             variant={"outline"}
                                             className={cn(
-                                                "w-[240px] pl-3 text-left font-normal",
+                                                "w-[300px] pl-3 text-left font-normal",
                                                 !field.value &&
                                                     "text-muted-foreground",
                                             )}
@@ -133,6 +137,9 @@ export default function UpdateProfileForm({
                                 >
                                     <Calendar
                                         mode="single"
+                                        captionLayout="dropdown-buttons"
+                                        fromYear={1990}
+                                        toYear={2016}
                                         selected={field.value}
                                         onSelect={field.onChange}
                                         disabled={(date) =>
@@ -150,8 +157,19 @@ export default function UpdateProfileForm({
                         </FormItem>
                     )}
                 />
-                <div className="flex justify-center">
-                    <Button type="submit">Save</Button>
+                <div className="flex justify-center gap-5">
+                    <Button
+                        type="button"
+                        variant="destructive"
+                        onClick={() => {
+                            router.back();
+                        }}
+                    >
+                        Cancel
+                    </Button>
+                    <Button type="submit" onClick={() => router.refresh()}>
+                        Save
+                    </Button>
                 </div>
             </form>
         </Form>

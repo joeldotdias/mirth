@@ -1,0 +1,1 @@
+ALTER TABLE "user" ADD COLUMN "dob" timestamp (6) with time zone;
