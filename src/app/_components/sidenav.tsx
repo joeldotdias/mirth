@@ -1,9 +1,11 @@
 import NavLinks from "./navlinks";
 import { ThemeSwitcher } from "./theme-switcher";
-import Avatar from "./avatar";
 import Link from "next/link";
+import { getUser } from "@/server/queries";
 
-export default function SideNav() {
+export default async function SideNav() {
+    const user = await getUser();
+
     return (
         <nav className="b-4 flex h-screen flex-col justify-between border-r border-gray-600 px-2 pb-4 lg:pr-5">
             <div>
@@ -15,13 +17,7 @@ export default function SideNav() {
                         </div>
                     </Link>
                 </div>
-
-                <NavLinks />
-
-                <div className="flex w-full items-center gap-2 py-6">
-                    <Avatar />
-                    <span className="hidden lg:block">Profile</span>
-                </div>
+                <NavLinks pfpUrl={user?.pfpUrl} />
             </div>
 
             <ThemeSwitcher />
