@@ -1,6 +1,13 @@
 "use client";
 
-import { Boxes, House, Search, User, type LucideProps } from "lucide-react";
+import {
+    BadgePlus,
+    Boxes,
+    House,
+    Search,
+    User,
+    type LucideProps,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ForwardRefExoticComponent, RefAttributes } from "react";
@@ -32,6 +39,11 @@ const navLinks: NavLink[] = [
         label: "Communities",
         link: "/communities",
         icon: Boxes,
+    },
+    {
+        label: "Create",
+        link: "/create",
+        icon: BadgePlus,
     },
 ];
 

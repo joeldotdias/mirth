@@ -1,3 +1,4 @@
+import { metadata } from "@/app/layout";
 import { getUser, updateUserPfp } from "@/server/queries";
 import { utapi } from "@/server/uploadthing";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
@@ -41,6 +42,28 @@ export const ourFileRouter = {
             }
 
             return { uploadedBy: metadata.userId };
+        }),
+    postUploader: f({
+        image: {
+            maxFileSize: "8MB",
+            maxFileCount: 4,
+            additionalProperties: { aspectRatio: 0.8, width: 480 },
+        },
+    })
+        .middleware(async () => {
+            const user = await getUser();
+            if (!user) {
+                throw new UploadThingError("Unauthorized");
+            }
+
+            return {
+                userId: user.id,
+            };
+        })
+        .onUploadComplete(async ({ metadata, file }) => {
+            console.log(
+                `Upload ${file.url} completed for userId: ${metadata.userId}`,
+            );
         }),
 } satisfies FileRouter;
 

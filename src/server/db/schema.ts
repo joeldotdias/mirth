@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
     boolean,
     timestamp,
@@ -102,3 +103,24 @@ export const authenticators = pgTable(
         }),
     }),
 );
+
+export const posts = pgTable("post", {
+    id: text("id")
+        .primaryKey()
+        .$defaultFn(() => crypto.randomUUID()),
+    userId: text("userId")
+        .notNull()
+        .references(() => users.id, { onDelete: "cascade" }),
+    urls: varchar("urls", { length: 1024 }).array().notNull(),
+    caption: varchar("caption", { length: 150 }),
+    tagged: text("tagged")
+        .array()
+        .notNull()
+        .default(sql`ARRAY[]::text[]`),
+    createdAt: timestamp("created_at", { withTimezone: true })
+        .default(sql`CURRENT_TIMESTAMP`)
+        .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+        () => new Date(),
+    ),
+});

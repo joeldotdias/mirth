@@ -138,8 +138,8 @@ export default function UpdateProfileForm({
                                     <Calendar
                                         mode="single"
                                         captionLayout="dropdown-buttons"
-                                        fromYear={1990}
-                                        toYear={2016}
+                                        fromYear={1960}
+                                        toYear={2024}
                                         selected={field.value}
                                         onSelect={field.onChange}
                                         disabled={(date) =>
