@@ -62,8 +62,13 @@ export const ourFileRouter = {
         })
         .onUploadComplete(async ({ metadata, file }) => {
             console.log(
-                `Upload ${file.url} completed for userId: ${metadata.userId}`,
+                `Upload ${JSON.stringify(file)} completed for userId: ${metadata.userId}`,
             );
+
+            try {
+            } catch (err) {
+                console.error(err);
+            }
         }),
 } satisfies FileRouter;
 

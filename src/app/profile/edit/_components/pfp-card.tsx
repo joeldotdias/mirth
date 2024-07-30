@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ImageIcon, Loader2, XIcon } from "lucide-react";
 import Cropper from "react-easy-crop";
 import {
+    type FileWithPreview,
     cropAndScaleImage,
     expandImageProperties,
     waitForImageToLoad,

@@ -2,7 +2,7 @@ import type { Area } from "react-easy-crop";
 import { invariant } from "./utils";
 import type { ExpandedRouteConfig } from "uploadthing/types";
 
-// type FileWithPreview = File & { preview: string };
+export type FileWithPreview = File & { preview: string };
 
 export const cropAndScaleImage = async (
     imageFile: FileWithPreview,

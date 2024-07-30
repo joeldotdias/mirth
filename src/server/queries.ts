@@ -2,7 +2,7 @@ import "server-only";
 
 import { db } from "./db";
 import { auth } from "@/auth";
-import { users } from "./db/schema";
+import { posts, users } from "./db/schema";
 import { eq } from "drizzle-orm";
 
 export async function getUser() {
@@ -48,3 +48,11 @@ export async function updateUserInfo(
         console.error(err);
     }
 }
+
+// export async function createPost(userId: string, postUrl: string) {
+//     try {
+//         await db.insert(posts).values({
+//             userId: userId,
+//         })
+//     }
+// }
